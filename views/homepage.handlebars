@@ -1,0 +1,26 @@
+<h1>Petition</h1>
+{{#if error}}
+   <p class='error'>{{error}}</p>
+{{/if}}   
+
+<form action='/' method='POST'>
+
+<label> 
+  First Name:
+  <input type="text" name="first_name" required placeholder='enter your first name'/>
+</label><br>
+
+<label> 
+  Last Name:
+  <input type="text" name="last_name" required placeholder='enter your last name'/>
+</label><br>
+
+<label>
+    Sign here:
+    <input type='hidden' name='signature' value="data:image/png;base64,hello" />
+    
+    <button>Submit</button>
+</label>
+    
+</form>
+ 
