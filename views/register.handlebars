@@ -1,0 +1,34 @@
+<h1>Join us today.</h1>
+
+{{#if error}}
+   <p class='error'>{{error}}</p>
+{{/if}}   
+
+<form action='/register' method='POST'>
+
+<label> 
+  First Name:
+  <input type="text" name="first_name" required placeholder='enter your first name'/>
+</label><br>
+
+<label> 
+  Last Name:
+  <input type="text" name="last_name" required placeholder='enter your last name'/>
+</label><br>
+
+<label> 
+  Email Address:
+  <input type="email" name="email" required placeholder='enter your email ID'/>
+</label><br>
+
+<label>
+    Password:
+    <input type="password" name="password" required placeholder='enter your password'/>
+</label><br>
+
+<Button>Sign Up</Button>
+
+</form>
+
+<h4>Already a member? <a href="/login">Click Here!</a></h4>
+

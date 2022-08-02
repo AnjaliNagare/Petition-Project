@@ -1,0 +1,20 @@
+<h1>Please Log in.</h1>
+{{#if error}}
+   <p class='error'>{{error}}</p>
+{{/if}}   
+
+<form action='/login' method='POST'>
+
+<label> 
+  Email Address:
+  <input type="email" name="email" required placeholder='enter your email ID'/>
+</label><br>
+
+<label> 
+  password:
+  <input type="password" name="password" required placeholder='enter your password'/>
+</label><br>
+
+<input type="submit" value="Log in">
+
+</form>

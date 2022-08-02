@@ -1,14 +1,21 @@
 const path = require("path");
 const express = require("express");
-const cookieSession = require("cookie-session");
-
-const { createSignature, getSignatures, getSignatureById } = require("./db");
-
 const app = express();
 
 const { engine } = require("express-handlebars");
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
+
+const {
+    createSignature,
+    getSignatures,
+    getSignatureById,
+    createUser,
+    login,
+} = require("./db");
+
+const { SESSION_SECRET } = require("./secrets.json");
+const cookieSession = require("cookie-session");
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -18,7 +25,6 @@ app.use(
     })
 );
 
-const { SESSION_SECRET } = require("./secrets.json");
 app.use(
     cookieSession({
         secret: SESSION_SECRET,
@@ -26,6 +32,16 @@ app.use(
         
     })
 );
+
+app.get("/", (request, response) => {
+    console.log("GET /", request.session);
+
+    if (request.session.signature_id) {
+        response.redirect("/signersList");
+        return;
+    }
+    response.render("homepage");
+});
 
 app.post("/", (request, response) => {
     console.log("POST/", request.body);
@@ -52,17 +68,6 @@ app.post("/", (request, response) => {
         
 });
 
-app.get("/", (request, response) => {
-    console.log("GET /", request.session);
-
-    if(request.session.signature_id){
-        response.redirect("/thankyou");
-        return;
-    }
-    response.render("homepage",{
-    });
-});
-
 app.get("/thankyou", (request, response)=>{
     if(!request.session.signature_id) {
         response.redirect("/");
@@ -84,6 +89,63 @@ app.get("/signersList", (request, response) => {
             signersList,
         });
     });
+});
+
+app.get('/register',(request,response) => {
+    response.render("register");
+});
+
+app.post('/register', (request, response) => {
+    console.log("post /register", request.body);
+    if(
+        !request.body.first_name ||
+        !request.body.last_name ||
+        !request.body.email ||
+        !request.body.password
+    ){
+        response.render("register", {
+            error: " please fill all fields",
+        });
+        return;
+    }
+    createUser(request.body) 
+        .then((newUser) => {
+            console.log("new user", newUser);
+            request.session.user_id = newUser.id;
+            response.redirect("/");
+        })
+        .catch((error) => {
+            console.log("error creating user", error);
+            response.status(500).render("register", {
+                error: "Error registering user",
+            });
+        });
+});
+
+app.get("/login", (request, response) => {
+    response.render("login");
+});
+
+app.post("/login", (request,response) => {
+    console.log("post /login", request.body);
+    login(request.body)
+        .then((foundUser) => {
+            if(!foundUser) {
+                response.render("login", {
+                    error: 'Login failed, please Try again.'
+                });
+                return;
+            }    
+            request.session.user_id = foundUser.id;
+            response.redirect("/");
+        })
+        .catch((error) => {
+            console.log("error", error);
+            response.status(500).render("register", {
+                error: "Error logging user",
+            });
+        });
+    
 });
 
 app.listen(8081, () => console.log("Listening to http://localhost:8081"));
