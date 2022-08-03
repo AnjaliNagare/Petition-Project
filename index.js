@@ -29,9 +29,10 @@ app.use(
     cookieSession({
         secret: SESSION_SECRET,
         maxAge: 1000 * 60 * 60 * 24 * 14, // two weeks of cookie validity
-        
+        sameSite: true,
     })
 );
+
 
 app.get("/", (request, response) => {
     console.log("GET /", request.session);
@@ -52,6 +53,7 @@ app.post("/", (request, response) => {
     ){
         response.render("homepage", {
             error:" please fill all fields",
+            
         });
         return;
     }
@@ -147,5 +149,13 @@ app.post("/login", (request,response) => {
         });
     
 });
+
+// app.get("/profile", (request, response) => {
+//     response.render("profile");
+// });
+
+// app.post("/profile", (request, response) => {
+//     console.log("post /profile", request.body);
+// });
 
 app.listen(8081, () => console.log("Listening to http://localhost:8081"));

@@ -10,6 +10,19 @@ const db = spicedPg(
     `postgres:${DATABASE_USER}:${DATABASE_PASSWORD}@localhost:5432/${DATABASE_NAME}`
 );
 
+function createUserProfile({ user_id, age, city, homepage }) {
+    return db
+        .query(
+            `INSERT INTO user_profiles JOIN signatures ON signatures.user_id = users.id
+            (age, city, url, user_Id) 
+    VALUES ($1, $2,$3,$4) 
+    RETURNING id`,
+            [user_id, age, city, homepage]
+        )
+        .then((result) => result.rows[0]);
+}
+
+
 const hash = (password) =>
     bcrypt.genSalt().then((salt) => bcrypt.hash(password, salt));
 
@@ -61,7 +74,11 @@ function createSignature({ first_name, last_name, signature }) {
 }
 
 function getSignatures(){
-    return db.query("SELECT * FROM signatures").then((result) => result.rows);
+    return db.query(`SELECT * FROM users
+        JOIN signatures ON signatures.user_id = users.id
+        FULL JOIN user_profiles ON user_profiles.user_id = users.id
+        WHERE signatures.signature IS NOT NULL`
+    ).then((result) => result.rows);
 }
 
 function getSignatureById(id) {
@@ -74,4 +91,5 @@ module.exports = {
     getSignatureById,
     createUser,
     login,
+    createUserProfile,
 };

@@ -17,10 +17,12 @@
 
 <label>
     Sign here:
-    <input type='hidden' name='signature' value="data:image/png;base64,hello" />
-    
-    <button>Submit</button>
+    <input type="hidden" name="signature" id="hidden" />
+    <canvas id="signature-canvas" width="600" height="150" style="border:1px solid #000"></canvas><br>
+    <input type="button" value="Clear" class="canvas-clear" />
+    <input type="button" value="Submit" />
 </label>
+<script src="canvas.js"></script>
     
 </form>
  
