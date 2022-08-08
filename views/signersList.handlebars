@@ -1,8 +1,10 @@
 <div class="sign-list">
-    <p>
+    <h2>
         Signers List
-    </p>
+    </h2>
     {{#each signersList}}
-      <p>{{id}} {{first_name}} {{last_name}} {{signature}}</p>
+     
+     <li> <a href="{{homepage}}" target="_blank">{{first_name}} {{last_name}} {{age}}</a> <a href="/signersList/{{city}}"> {{city}}</a></li>
+     
     {{/each}}  
 </div>

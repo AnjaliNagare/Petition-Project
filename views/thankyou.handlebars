@@ -1,4 +1,26 @@
-<div>
-    <p>Thank you for signing petition.</p>
-    <a href="/signersList">See all signers</a>
+<div class="thanks">
+    <h2>Thank you for your signature! Together, we can make a difference in reducing air pollution.</h2>
+    {{log signature}}
+
+    <img src='{{signature.signature}}' alt='current signature' id="sign-img" /><br>
+
+    <h2><a href="/signersList">See all signer(s)</a><br></h2>
+
+    <h2><a href="/profile/edit">Edit your Profile</a><br></h2>
+
+    <form action="/deletesignature" method="POST">
+
+    <button type="submit"><h2>Delete your Signature</h2></button>
+    </form>
+    
+    <form action="/logout" method="POST">
+
+    <button type="submit"><h2>Logout</h2></button>
+    </form>
 </div>
+{{#if error}}
+<div>
+<p class="error">{{error}}</p>
+</div>
+{{/if}}
+

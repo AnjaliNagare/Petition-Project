@@ -1,0 +1,36 @@
+<div class="edit-pro-container">
+    <h2>Edit your profile.</h2>
+
+    <form action="/profile/edit" method="POST">
+
+        <label>First Name</label><br>
+        <input type="text" name="first_name" value="{{first_name}}" required /><br>
+
+        <label>Last Name</label><br>
+        <input type="text" name="last_name" value="{{last_name}}" /><br>
+
+
+        <label>Email-id</label><br>
+        <input type="email" name="email" value="{{email}}" /><br>
+
+        <label>Age</label><br>
+        </label>
+        <input type="number" name="age" value="{{age}}" /><br>
+
+        <label>City</label><br>
+        <input type="text" name="city" value="{{city}}" /><br>
+
+        <label>Homepage</label><br>
+        <input type="text" name="homepage" /><br>
+
+        <button type="submit">Update</button>
+
+    </form>
+</div>
+</div>
+
+{{#if error}}
+<div>
+    {{error}}
+</div>
+{{/if}}

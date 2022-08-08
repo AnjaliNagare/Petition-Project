@@ -1,28 +1,21 @@
-<h1>Petition</h1>
+<div class="box-form">
+    <div class="middle">
+        <div class="overlay">
+            <h2>Sign our petition if you agree that (odd, even formula) vehicles with number plates with an odd last
+                digit will be allowed on roads only on odd dates,
+                while vehicles with even-last digit can be taken out only on even dates.</h2>
+            <span>
+                <form action='/' method='POST' class="sign">
+                    <label for="canvas">Sign here</label><br>
+                    <input type="hidden" name="signature" id="hidden" />
+                    <canvas id="signature-canvas"></canvas><br>
+                    <button type="submit">Submit</button>
+                    <script src="canvas.js"></script>
+                </form>
+            </span>
+        </div>
+    </div>
+</div>
 {{#if error}}
-   <p class='error'>{{error}}</p>
-{{/if}}   
-
-<form action='/' method='POST'>
-
-<label> 
-  First Name:
-  <input type="text" name="first_name" required placeholder='enter your first name'/>
-</label><br>
-
-<label> 
-  Last Name:
-  <input type="text" name="last_name" required placeholder='enter your last name'/>
-</label><br>
-
-<label>
-    Sign here:
-    <input type="hidden" name="signature" id="hidden" />
-    <canvas id="signature-canvas" width="600" height="150" style="border:1px solid #000"></canvas><br>
-    <input type="button" value="Clear" class="canvas-clear" />
-    <input type="button" value="Submit" />
-</label>
-<script src="canvas.js"></script>
-    
-</form>
- 
+<p class='error'>{{error}}</p>
+{{/if}}

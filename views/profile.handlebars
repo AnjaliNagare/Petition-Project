@@ -1,26 +1,41 @@
-<h1>Now please add some more information about yourself.</h1>
-
 {{#if error}}
-   <p class='error'>{{error}}</p>
-{{/if}}   
+<p class='error'>{{error}}</p>
+{{/if}}
 
-<form action='/profile' method='POST'>
+<div class="container">
+  <div class="center">
+    <h1>Now please provide some more information about yourself.</h1>
 
-<label> 
-  Age:
-  <input type="number" name="age" required placeholder='enter your age'/>
-</label><br>
+    <form action='/profile' method='POST'>
 
-<label> 
-  City:
-  <input type="text" name="city" required placeholder='enter your City name'/>
-</label><br>
+      <div class="txt-field">
+        <input type="number" name="age" required />
+        <span></span>
+        <label>
+          Age
+        </label><br>
+      </div>
 
-<label> 
-  Homepage:
-  <input type="" name="homepage" required placeholder='homepage'/>
-</label><br>
+      <div class="txt-field">
+        <input type="text" name="city" required />
+        <span></span>
+        <label>
+          City
+        </label><br>
+      </div>
 
-<button type="submit">Continue</button>
 
-</form>
+      <div class="txt-field">
+        <input type="" name="homepage" required />
+        <span></span>
+        <label>
+          Homepage
+        </label><br>
+      </div>
+
+
+      <button type="submit">Continue</button>
+
+    </form>
+  </div>
+</div>

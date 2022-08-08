@@ -1,20 +1,31 @@
-<h1>Please Log in.</h1>
 {{#if error}}
-   <p class='error'>{{error}}</p>
-{{/if}}   
+<p class='error'>{{error}}</p>
+{{/if}}
+<div class="container">
+	<div class="center">
+		<h1>Please Log in.</h1>
+		<form action='/login' method='POST'>
+			<div class="txt-field">
+				<input type="email" name="email" required />
+				<span></span>
+				<label>
+					Email
+				</label><br>
+			</div>
+			<div class="txt-field">
+				<input type="password" name="password" required />
+				<span></span>
+				<label>
+					password
+				</label><br>
+			</div>
 
-<form action='/login' method='POST'>
+			<button type="submit">log in</button>
 
-<label> 
-  Email Address:
-  <input type="email" name="email" required placeholder='enter your email ID'/>
-</label><br>
 
-<label> 
-  password:
-  <input type="password" name="password" required placeholder='enter your password'/>
-</label><br>
-
-<input type="submit" value="Log in">
-
-</form>
+		</form>
+		<div class="link">
+			<h4>Not registered yet? <a href="/register">Click Here!</a></h4>
+		</div>
+	</div>
+</div>

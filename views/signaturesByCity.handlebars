@@ -1,5 +1,17 @@
-<h1>we are the citizens of {{city}}.</h1>
+<main>
+    <div class="city-signers">
+    <ul>
+        <h1>Supporters in {{city}} city.</h1>
+        {{#each signatures}}
+        <li>{{first_name}} {{last_name}} {{age}}</li>
+        {{/each}}  
+    </ul>
+    <p>
+        <a href="/signersList">Back</a>
+    </p>
+    </div>
+</main>
 
 {{#if error}}
-    <p class="error">{{error}}</p>
+<p class="error">{{error}}</p>
 {{/if}}
